@@ -17,6 +17,12 @@ namespace 'test' do
     t.cucumber_opts = 'features --format progress --color'
   end
 
+  task 'fail_on_low_coverage' do
+    ENV['FAIL_ON_LOW_COVERAGE'] = '1'
+  end
+
+  task 'spec' => 'test:fail_on_low_coverage'
+
   desc 'Runs all unit tests and acceptance tests'
   task 'all' => ['test:spec', 'test:features']
 end

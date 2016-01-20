@@ -1,4 +1,5 @@
-require_relative '../spec_helper'
+require 'pathname'
+require_relative '../../lib/reek/spec'
 
 RSpec.describe 'Reek source code' do
   it 'has no smells' do

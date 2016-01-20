@@ -1,4 +1,20 @@
 require 'pathname'
+
+require 'simplecov'
+
+SimpleCov.start do
+  track_files 'lib/**/*.rb'
+  add_filter 'lib/reek/version.rb' # version.rb is loaded too early to test
+end
+
+if ENV['FAIL_ON_LOW_COVERAGE'] == '1'
+  SimpleCov.at_exit do
+    SimpleCov.result.format!
+    SimpleCov.minimum_coverage 98.71
+    SimpleCov.minimum_coverage_by_file 60
+  end
+end
+
 require_relative '../lib/reek'
 require_relative '../lib/reek/spec'
 require_relative '../lib/reek/ast/ast_node_class_map'
